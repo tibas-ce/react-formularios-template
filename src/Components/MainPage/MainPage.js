@@ -1,27 +1,42 @@
-import React, { useState } from 'react'
+//import React, { useState } from 'react'
 import { MainContainer, Form, Input } from './styles'
+import { useForm } from '../../hook/useForm'
 
 function MainPage() {
-  const [nome, setNome] = useState("")
-  const [idade, setIdade] = useState("")
-  const [email, setEmail] = useState("")
 
-  const onChangeNome = (event) => {
-    setNome(event.target.value)
-  }
+  const { form, onChange, clear} = useForm({
+    nome:"",
+    idade:"",
+    email:"", 
+    endereco:"",
+    cep:"", 
+    profissao:""
+  })
 
-  const onChangeIdade = (event) => {
-    setIdade(event.target.value)
-  }
+  // const [nome, setNome] = useState("")
+  // const [idade, setIdade] = useState("")
+  // const [email, setEmail] = useState("")
 
-  const onChangeEmail = (event) => {
-    setEmail(event.target.value)
-  }
+  // const onChangeNome = (event) => {
+  //   setNome(event.target.value)
+  // }
+
+  // const onChangeIdade = (event) => {
+  //   setIdade(event.target.value)
+  // }
+
+  // const onChangeEmail = (event) => {
+  //   setEmail(event.target.value)
+  // }
 
   const handleClick = (event) => {
     event.preventDefault()
 
-    console.log(`nome: ${nome}, idade: ${idade}, e-mail: ${email} `)
+    console.log(form);
+
+    clear()
+
+    //console.log(`nome: ${nome}, idade: ${idade}, e-mail: ${email} `)
   }
 
   return (
@@ -32,25 +47,57 @@ function MainPage() {
         <label htmlFor="nome">Nome:</label>
         <Input 
           id="nome"
-          value={nome}
-          onChange={onChangeNome}
+          type={form.nome}
+          name='nome'
+          value={form.nome}
+          onChange={onChange}
         />
 
         <label htmlFor="idade">Idade:</label>
         <Input 
           id="idade"
-          value={idade}
-          onChange={onChangeIdade}
+          type={form.idade}
+          name='idade'
+          value={form.idade}
+          onChange={onChange}
         />
 
         <label htmlFor="email">E-mail:</label>
         <Input 
           id="email"
-          value={email}
-          onChange={onChangeEmail}
+          type={form.email}
+          name='email'
+          value={form.email}
+          onChange={onChange}
         />
         
+        <label htmlFor="endereco">Endereço:</label>
+        <Input 
+          id="endereco"
+          type={form.endereco}
+          name='endereco'
+          value={form.endereco}
+          onChange={onChange}
+        />
         
+        <label htmlFor="cep">CEP:</label>
+        <Input 
+          id="cep"
+          type={form.cep}
+          name='cep'
+          value={form.cep}
+          onChange={onChange}
+        />
+
+        <label htmlFor="profissao">Profissão:</label>
+        <Input 
+          id="profissao"
+          name='profissao'
+          value={form.profissao}
+          onChange={onChange}
+          required
+        />
+
       <button type="submit">Enviar dados</button>
       </Form>
     </MainContainer>
